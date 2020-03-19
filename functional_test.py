@@ -2,14 +2,14 @@ from selenium import webdriver
 import unittest
 
 class NewVisitorTest(unittest.TestCase):
-    ''' тест нового посетителя'''
+    ''' test new user'''
 
     def setUp(self):
-        '''установка'''
+        '''mount'''
         self.browser = webdriver.Firefox()
 
     def tearDown(self):
-        '''демонтаж'''
+        '''unmount'''
         self.browser.quit()
 
     def test_can_start_a_list_and_retrieve_it_later(self):
@@ -21,7 +21,7 @@ class NewVisitorTest(unittest.TestCase):
         # Она видит, что заголовок и шапка страницы говорят о списках
         # неотложных дел
         self.assertIn('To-Do', self.browser.title)
-        self.fail('Закончить тест')
+        self.fail('End test')
 
         # Ей сразу же предлагается ввести элемент списка
         # Она набирает в текстовом поле "Купить павлиньи перья" (ее хобби –

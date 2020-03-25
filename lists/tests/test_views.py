@@ -1,5 +1,6 @@
 from django.test import TestCase
 from lists.models import Item, List
+from lists.forms import ItemForm
 
 
 class HomePageTest(TestCase):
@@ -9,6 +10,11 @@ class HomePageTest(TestCase):
         '''test: home page return correct html'''
         response = self.client.get('/')
         self.assertTemplateUsed(response, 'home.html')
+
+    def test_home_page_uses_item_form(self):
+        '''test: home page uses form for lists element'''
+        response = self.client.get('/')
+        self.assertIsInstance(response.context['form'], ItemForm)
 
 
 class ListViewTest(TestCase):

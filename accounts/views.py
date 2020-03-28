@@ -5,7 +5,6 @@ from django.contrib import messages
 from django.contrib import auth
 
 from accounts.models import Token
-import sys
 
 
 def send_login_email(request):

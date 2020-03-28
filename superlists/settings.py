@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'lists',
     'accounts',
+    'functional_test',
 ]
 
 AUTH_USER_MODEL = 'accounts.User'
@@ -149,3 +150,8 @@ LOGGING = {
     },
     'root': {'level': 'INFO'},
 }
+
+try:
+    from .local_settings import *
+except:
+    pass

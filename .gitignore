@@ -3,4 +3,3 @@ geckodriver.log
 __pycache__
 *.pyc
 .idea
-lists/migrations*

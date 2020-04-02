@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from django.core.exceptions import ValidationError
 from django.contrib.auth import get_user_model
+from django.views.generic import FormView, CreateView
 
 from lists.models import Item, List
 from lists.forms import ItemForm, ExistingListItemForm, NewListForm
@@ -8,9 +8,10 @@ from lists.forms import ItemForm, ExistingListItemForm, NewListForm
 User = get_user_model()
 
 
-def home_page(request):
+class HomePageView(FormView):
     '''home page'''
-    return render(request, 'home.html', {'form': ItemForm()})
+    template_name = 'home.html'
+    form_class = NewListForm
 
 
 def view_list(request, list_id):
@@ -28,6 +29,12 @@ def view_list(request, list_id):
 def my_lists(request, email):
     owner = User.objects.get(email=email)
     return render(request, 'my_lists.html', {'owner': owner})
+
+
+class NewListView(CreateView, HomePageView):
+    def form_valid(self, form):
+        list_ = form.save(owner=self.request.user)
+        return redirect(list_)
 
 
 def new_list(request):
